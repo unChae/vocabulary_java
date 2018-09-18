@@ -1,0 +1,105 @@
+MainClass
+
+EnterFrame
+LoginFrame
+AccountFrame - ID PWD 이름 전화번호 E-MAIL 
+LoginData
+
+MainFrame
+Search - 기능
+Input&Output - 기능
+Quiz - 기능
+
+WidgetFrame
+
+email Email 대소문자 구분 해야 id 계정 중복 생성을 막을 수 있다.
+콤보 박스를 이용해서 막던가 해야한다
+
+계정 생성 => 테이블생성 
+테이블 이름으로 둘 것 email, name
+email으로 설정시 이름 설정이 안됨
+name으로 설정 시 중복이 가능해버림
+
+Swing:
+
+btn - JButton
+chk - JCheckBox
+clr - JColorChooser
+cmb - JComboBox
+ico - JDesktopIcon
+edt - JEditorPane
+fch - JFileChooser
+ifr - JInternalFrame
+lbl - JLabel
+lyp - JLayeredPane
+lst - JList
+mnu - JMenuBar
+mni - JMenuItem
+opt - JOptionPane
+pnl - JPanel
+pmn - JPopupMenu
+prg - JProgressBar
+rad - JRadioButton
+rot - JRootPane
+scb - JScollBar
+scr - JScrollPane
+spr - JSeparator
+sld - JSlider
+spn - JSpinner
+spl - JSplitPane
+tab - JTabbedPaneJTable
+tbl - JTable
+tbh - JTableHeader
+txa - JTextArea
+txt - JTextField
+txp - JTextPane
+tgl - JToggleButton
+tlb - JToolBar
+tlt - JToolTip
+tre - JTree
+vpr - JViewport
+win - JWindow and descendants (JFrame, JDialog, JFileDialog)
+
+backgroundPN
+
+mainPN
+menuPN
+searchPN
+InOutPN
+quizPN
+
+widget Frame
+
+loginPN
+gifLB
+accessPN
+accountPN
+
+BlockChain
+블록체인은 최초의 블록(Genesis Block)부터 시작해서 바로 앞의 블록에 대한 링크를 가지고 있는 링크드 리스트다. 블록체인은 여러 노드에 걸쳐 분산되어 저장 및 관리되며, 블록에는 거래 정보가 포함되어 있으므로, 블록의 집합체인 블록체인은 모든 거래 정보를 포함하는 거대한 분산 장부라고 할 수 있다.
+
+Block
+블록은 블록체인의 원소로서 개념적으로는 다수의 거래 정보의 묶음을 의미한다.
+블록은 블록 헤더와 거래 정보, 기타 정보로 구성된다.
+
+블록 헤더는 version, previousblockhash, merklehash, time, bits, nonce 이렇게 6개의 정보로 구성된다.
+거래 정보는 입출금과 관련한 여러가지 정보를 가지고 있다.
+기타 정보는 블록 내에 있는 정보 중에서 블록 헤더와 거래 정보에 해당하지 않는 정보를 말하며, 블록 해쉬 계산에 사용되지 않는다.
+
+version : 소프트웨어/프로토콜 버전
+previousblockhash : 블록 체인에서 바로 앞에 위치하는 블록의 블록 해쉬
+merklehash : 개별 거래 정보의 거래 해쉬를 2진 트리 형태로 구성할 때, 트리 루트에 위치하는 해쉬값
+time : 블록이 생성된 시간
+bits : 난이도 조절용 수치
+nonce : 최초 0에서 시작하여 조건을 만족하는 해쉬값을 찾아낼때까지의 1씩 증가하는 계산 회수
+
+완료된 거래 정보의 변경이 사실상 불가능한 이유
+거래 정보의 해쉬값은 해당 거래가 포함된 블록의 merklehash 계산에 입력값으로 사용되고, merklehash는 블록 해쉬의 계산에 입력값으로 사용된다. 블록 해쉬는 다음 블록(A라 하면)의 previousblockhash 값으로 저장되며, previousblockhash은 A 블록의 블록 헤더 정보로서, A 블록의 블록 해쉬를 계산하는데 입력값으로 사용된다.
+
+따라서, 거래 정보가 변경되면 merklehash가 변경되고, merklehash가 변경되면 블록 해쉬가 변경되고, 블록 해쉬의 변경은 다음 블록의 블록 해쉬 변경으로 연쇄적으로 이어지게 된다. 그리고 블록 해쉬는 작업 증명의 해답(nonce 값)을 찾아내야 구할 수 있으므로, 거래 정보를 변경한 블록부터 그 이후의 모든 블록을 순서대로 다시 채굴해야 한다.
+
+블록 하나 채굴하는데 평균 10분이 소요되고, http://bitcoincharts.com/bitcoin/ 에서 확인한 2016-01-23 현재 총 블록 수가 약 40만 블록이므로, 최초의 원조 블록인 Genesis 블록에 포함된 거래를 변경하면 약 400만 분, 약 7.6년의 시간이 소요된다.
+
+그 7.6년의 시간 동안에도 새로운 블록들도 평균 10분 마다 하나 씩 계속 생성되므로 이를 모두 뒤집는 것은 사실 상 불가능하다.
+
+작업 증명은 새로운 블록을 블록체인에 추가하는 ‘작업’을 완료했음을 ‘증명’하는 것이라고 이해하면 된다. 새로운 블록을 블록체인에 추가하려면, 그 새로운 블록의 블록 해쉬를 계산해내야하고, 그 블록 해쉬를 계산해내려면 그 블록의 블록 헤더 정보 중의 하나인 nonce값을 계산을 통해 구해야 한다.
